@@ -1,0 +1,26 @@
+#  Laboratorio 6  
+
+#  Criacao de Usuarios
+
+adicionaUsuario nome="Despoina" login="despoina.solaris"
+adicionaUsuario nome="Alpanu" login="alpanu.destroctu"
+adicionaUsuario nome="Typhon" login="typhon.moira"
+adicionaUsuario nome="Achlae" login="achlae.sotare"
+adicionaUsuario nome="Aita" login="aita.mortis"
+
+# Adiciona Credito
+
+
+adicionaCredito login="despoina.solaris" credito=1000
+adicionaCredito login="alpanu.destroctu" credito=99
+adicionaCredito login="typhon.moira" credito=400
+adicionaCredito login="achlae.sotare" credito=20
+adicionaCredito login="aita.mortis" credito=33
+
+# Confere Credito
+
+expect 1000.0 confereCredito login="despoina.solaris"
+expect 99.0 confereCredito login="alpanu.destroctu"
+expect 400.0 confereCredito login="typhon.moira"
+expect 20.0 confereCredito login="achlae.sotare"
+expect 33.0 confereCredito login="aita.mortis"

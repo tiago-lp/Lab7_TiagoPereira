@@ -1,0 +1,59 @@
+#  Laboratorio 6  
+
+# Vende Jogo
+vendeJogo jogoNome="Mario64" preco=89 jogabilidades="offline multiplayer" estiloJogo="rpg" loginUser="despoina.solaris"
+vendeJogo jogoNome="Sorcerer's Kingdom" preco=400 jogabilidades="offline" estiloJogo="rpg" loginUser="despoina.solaris"
+vendeJogo jogoNome="Mega Man" preco=30 jogabilidades="competitivo multiplayer" estiloJogo="plataforma" loginUser="alpanu.destroctu"
+vendeJogo jogoNome="Arena" preco=50 jogabilidades="competitivo offline" estiloJogo="rpg" loginUser="alpanu.destroctu"
+vendeJogo jogoNome="Fallout 3" preco=90 jogabilidades="cooperativo online" estiloJogo="rpg" loginUser="typhon.moira"
+vendeJogo jogoNome="Fallout 4" preco=280 jogabilidades="cooperativo online" estiloJogo="rpg" loginUser="typhon.moira"
+vendeJogo jogoNome="Street Fighter" preco=15 jogabilidades="competitivo online" estiloJogo="luta" loginUser="achlae.sotare"
+vendeJogo jogoNome="Fatal Fury" preco=20 jogabilidades="competitivo multiplayer" estiloJogo="luta" loginUser="aita.mortis"
+vendeJogo jogoNome="Simpsons vs Family Guy" preco=8 jogabilidades="competitivo multiplayer" estiloJogo="luta" loginUser="aita.mortis"
+
+
+
+
+# Realiza Upgrade 
+
+upgrade login="despoina.solaris"
+upgrade login="typhon.moira"
+expectError "Upgrade impossivel de ser realizado, usuario ja eh veterano" upgrade login="despoina.solaris"
+expectError "Impossivel realizar upgrade, quantidade de x2p insuficiente!" upgrade login="alpanu.destroctu"
+expectError "Impossivel realizar upgrade, quantidade de x2p insuficiente!" upgrade login="achlae.sotare"
+expectError "Impossivel realizar upgrade, quantidade de x2p insuficiente!" upgrade login="aita.mortis"
+
+# Recupera o XP2 do Usuario
+
+expect 4890 getX2p login="despoina.solaris"
+expect 800 getX2p login="alpanu.destroctu"
+expect 3700 getX2p login="typhon.moira"
+expect 150 getX2p login="achlae.sotare"
+expect 280 getX2p login="aita.mortis"
+
+# Adiciona Credito
+
+
+adicionaCredito login="despoina.solaris" credito=100
+adicionaCredito login="alpanu.destroctu" credito=100
+adicionaCredito login="typhon.moira" credito=100
+adicionaCredito login="achlae.sotare" credito=100
+adicionaCredito login="aita.mortis" credito=100
+
+# Vende Jogo
+
+vendeJogo jogoNome="Marvel vs Capcom" preco=100 jogabilidades="competitivo multiplayer" estiloJogo="luta" loginUser="despoina.solaris"
+vendeJogo jogoNome="Marvel vs Capcom" preco=100 jogabilidades="competitivo multiplayer" estiloJogo="luta" loginUser="alpanu.destroctu"
+vendeJogo jogoNome="Marvel vs Capcom" preco=100 jogabilidades="competitivo multiplayer" estiloJogo="luta" loginUser="typhon.moira"
+vendeJogo jogoNome="Marvel vs Capcom" preco=100 jogabilidades="competitivo multiplayer" estiloJogo="luta" loginUser="achlae.sotare"
+vendeJogo jogoNome="Marvel vs Capcom" preco=100 jogabilidades="competitivo multiplayer" estiloJogo="luta" loginUser="aita.mortis"
+
+# Recupera o XP2 do Usuario
+
+expect 6390 getX2p login="despoina.solaris"
+expect 1800 getX2p login="alpanu.destroctu"
+expect 5200 getX2p login="typhon.moira"
+expect 1150 getX2p login="achlae.sotare"
+expect 1280 getX2p login="aita.mortis"
+
+

@@ -1,0 +1,19 @@
+#  Laboratorio 6  
+
+# Registra Jogadas
+
+registraJogada login="alpanu.destroctu" nomeJogo="Mega Man" score=50 venceu=false
+registraJogada login="alpanu.destroctu" nomeJogo="Mega Man" score=100 venceu=false
+registraJogada login="alpanu.destroctu" nomeJogo="Mega Man" score=170 venceu=true
+registraJogada login="achlae.sotare" nomeJogo="Street Fighter" score=10000 venceu=false
+registraJogada login="achlae.sotare" nomeJogo="Street Fighter" score=20000 venceu=false
+registraJogada login="achlae.sotare" nomeJogo="Street Fighter" score=28000 venceu=false
+registraJogada login="achlae.sotare" nomeJogo="Street Fighter" score=35000 venceu=true
+registraJogada login="aita.mortis" nomeJogo="Fatal Fury" score=15000 venceu=false
+registraJogada login="aita.mortis" nomeJogo="Fatal Fury" score=27000 venceu=false
+
+# Confere X2p
+
+expect 1820 getX2p login="alpanu.destroctu"
+expect 1243 getX2p login="achlae.sotare" 
+expect 1322 getX2p login="aita.mortis" 
