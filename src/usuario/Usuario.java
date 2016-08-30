@@ -1,10 +1,10 @@
 package usuario;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import excecoes.StringInvalidaException;
+import excecoes.ValorInvalidoException;
 import jogo.Jogo;
 
 public abstract class Usuario {
@@ -15,7 +15,7 @@ public abstract class Usuario {
 	private String login;
 	private Set<Jogo> meusJogos;
 	private double credito;
-	private int xp2;
+	private int x2p;
 
 	public Usuario(String nome, String login) throws StringInvalidaException {
 
@@ -28,18 +28,26 @@ public abstract class Usuario {
 
 		this.nome = nome;
 		this.login = login;
-		meusJogos = new HashSet<Jogo>();
+		this.meusJogos = new HashSet<Jogo>();
 		this.credito = 0;
 	}
 
 	public abstract void compraJogo(Jogo jogo) throws Exception;
+	
 
-	public void setXp2(int novoValor) {
-		this.xp2 = novoValor;
+	public void adicionaDinheiro(double valor) throws ValorInvalidoException{
+		if(valor < 0){
+			throw new ValorInvalidoException("Valor que deseja adicionar ao saldo nao pode ser negativo.");
+		}
+		this.setCredito(this.credito + valor);
+	}
+	
+	public void setX2p(int novoValor) {
+		this.x2p = novoValor;
 	}
 
-	public int getXp2() {
-		return this.xp2;
+	public int getX2p() {
+		return this.x2p;
 	}
 
 	public void cadastraJogo(Jogo jogo) {
@@ -75,19 +83,30 @@ public abstract class Usuario {
 		if (jogo == null) {
 			throw new Exception();
 		}
-		setXp2(getXp2() + jogo.registraJogada(score, venceu));
+		setX2p(getX2p() + jogo.registraJogada(score, venceu));
 	}
-
-	public Jogo buscaJogo(String nomeJogo) {
-		Jogo buscado = null;
-		Iterator itr = meusJogos.iterator();
-		while (itr.hasNext()) {
-			Jogo achado = (Jogo) itr.next();
-			if (achado.getNome().equals(nomeJogo)) {
-				buscado = achado;
+	
+	public boolean contemJogo(String nomeJogo) throws StringInvalidaException {
+		if(nomeJogo == null || nomeJogo.trim().isEmpty()){
+			throw new StringInvalidaException("Nome do jogo nao pode ser nulo ou vazio.");
+		}
+		for(Jogo jogos : this.meusJogos){
+			if(jogos.getNome().equalsIgnoreCase(nomeJogo)){
+				return true;
 			}
 		}
-		return buscado;
+		return false;
+	}
+
+	public Jogo buscaJogo(String nomeJogo) throws StringInvalidaException{
+		if(contemJogo(nomeJogo)){
+			for(Jogo jogos : this.meusJogos){
+				if(jogos.getNome().equalsIgnoreCase(nomeJogo)){
+					return jogos;
+				}
+			}
+		}
+		return null;
 	}
 
 	public Set<Jogo> getMeusJogos() {
@@ -100,10 +119,8 @@ public abstract class Usuario {
 
 	public double calculaPrecoTotal() {
 		double total = 0;
-		Iterator itr = meusJogos.iterator();
-		while (itr.hasNext()) {
-			Jogo achado = (Jogo) itr.next();
-			total += achado.getPreco();
+		for(Jogo jogo : this.meusJogos){
+			total += jogo.getPreco();
 		}
 		return total;
 	}

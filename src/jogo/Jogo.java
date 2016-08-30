@@ -14,7 +14,7 @@ public abstract class Jogo {
 	private int vezesJogadas;
 	private int vezesConcluidas;
 	private int maiorScore;
-	Set<Jogabilidade> jogabilidades;
+	private Set<Jogabilidade> jogabilidades;
 
 	public Jogo(String nome, double preco) throws StringInvalidaException, PrecoInvalidoException {
 
@@ -30,7 +30,7 @@ public abstract class Jogo {
 		this.vezesConcluidas = 0;
 		this.vezesJogadas = 0;
 		this.maiorScore = 0;
-		jogabilidades = new HashSet<Jogabilidade>();
+		this.jogabilidades = new HashSet<Jogabilidade>();
 	}
 
 	public Jogo(String nome, double preco, Set<Jogabilidade> jogabilidades)
@@ -84,25 +84,43 @@ public abstract class Jogo {
 	public void setVezesJogadas(int novaQuantidade) {
 		this.vezesJogadas = novaQuantidade;
 	}
+	
+	public Set<Jogabilidade> getJogabilidades(){
+		return this.jogabilidades;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(preco);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Jogo){
+			Jogo temp = (Jogo) obj;
+			if(this.nome.equalsIgnoreCase(temp.getNome()) && this.preco == temp.getPreco()){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+	}
+	
 	@Override
 	public String toString() {
 		String resultado = "==> Jogou " + getVezesJogadas() + " vez(es)" + FIM_DE_LINHA;
 		resultado += "==> Zerou " + getvezesConcluidas() + " vez(es)" + FIM_DE_LINHA;
 		resultado += "==> Maior Score: " + getMaiorScore() + FIM_DE_LINHA;
 		return resultado;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Jogo) {
-			Jogo temp = (Jogo) obj;
-
-			return this.getNome().equals(temp.getNome()) && this.getPreco() == temp.getPreco();
-
-		} else {
-			return false;
-		}
-
 	}
 }

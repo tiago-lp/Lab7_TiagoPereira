@@ -1,7 +1,5 @@
 package usuario;
 
-import java.util.Iterator;
-
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
 import jogo.Jogo;
@@ -11,7 +9,7 @@ public class Veterano extends Usuario {
 
 	public Veterano(String nome, String login) throws StringInvalidaException {
 		super(nome, login);
-		setXp2(1000);
+		setX2p(1000);
 	}
 
 	@Override
@@ -22,7 +20,7 @@ public class Veterano extends Usuario {
 		} else {
 			int parteInteira =(int)( jogo.getPreco() - (jogo.getPreco() % 1));
 			int bonusXp =  parteInteira * 15;
-			setXp2(getXp2() + bonusXp);
+			setX2p(getX2p() + bonusXp);
 			setCredito(getCredito() - custo);
 			this.cadastraJogo(jogo);
 
@@ -34,15 +32,13 @@ public class Veterano extends Usuario {
 		String myString = this.getLogin() + FIM_DE_LINHA;
 		myString += this.getNome() + " - Jogador Veterano" + FIM_DE_LINHA;
 		myString += "Lista de Jogos:" + FIM_DE_LINHA;
-
-		Iterator itr = getMeusJogos().iterator();
-		while (itr.hasNext()) {
-			Jogo j = (Jogo) itr.next();
-			myString += j.toString();
+		
+		for(Jogo jogo : super.getMeusJogos()){
+			myString += jogo.toString() + FIM_DE_LINHA;
 		}
-		myString += FIM_DE_LINHA;
-		myString += "Total de pre�o dos jogos: R$ " + this.calculaPrecoTotal() + FIM_DE_LINHA;
-		myString += "--------------------------------------------";
+		
+		myString += "Total de preco dos jogos: R$ " + this.calculaPrecoTotal() + FIM_DE_LINHA;
+		myString += "--------------------------------------------" + FIM_DE_LINHA;
 		return myString;
 	}
 
