@@ -22,6 +22,7 @@ import usuario.Veterano;
 
 public class Facade {
 	public static final String FIM_DE_LINHA = System.lineSeparator();
+	
 	private List<Usuario> meusUsuarios;
 	private HashMap<String, Jogabilidade> mapJogabildades;
 
