@@ -4,9 +4,10 @@ import java.util.Set;
 
 import excecoes.PrecoInvalidoException;
 import excecoes.StringInvalidaException;
+import excecoes.ValorInvalidoException;
 
 public class Rpg extends Jogo{
-	public final static int TAXA_XP2 = 10;
+	public final static int TAXA_X2P = 10;
 	
 	public Rpg(String nome, double preco) throws StringInvalidaException, PrecoInvalidoException {
 		super(nome, preco);
@@ -17,7 +18,7 @@ public class Rpg extends Jogo{
 	}
 
 	@Override
-	public int registraJogada(int score, boolean venceu) {
+	public int registraJogada(int score, boolean venceu) throws ValorInvalidoException {
 		setVezesJogadas(getVezesJogadas()+ 1);
 		if(score > this.getMaiorScore()){
 			setMaiorScore(score);
@@ -26,7 +27,7 @@ public class Rpg extends Jogo{
 			setVezesConcluidas(getvezesConcluidas() + 1);
 			
 		}
-		return TAXA_XP2;
+		return TAXA_X2P;
 	}
 	
 	public String toString() {

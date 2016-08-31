@@ -94,12 +94,12 @@ public class Facade {
 		Usuario antigo = this.buscaUsuario(login);
 		if (antigo instanceof Veterano) {
 			throw new UpgradeInvalidoException("Upgrade impossivel de ser realizado, usuario ja eh veterano");
-		} else if (antigo.getXp2() < 1000) {
+		} else if (antigo.getX2p() < 1000) {
 			throw new UpgradeInvalidoException("Impossivel realizar upgrade, quantidade de x2p insuficiente!");
 		}
 		Usuario novo = new Veterano(antigo.getNome(), antigo.getLogin());
 		novo.setCredito(antigo.getCredito());
-		novo.setXp2(antigo.getXp2());
+		novo.setX2p(antigo.getX2p());
 		novo.setMeusJogos(antigo.getMeusJogos());
 		int index = meusUsuarios.indexOf(antigo);
 		meusUsuarios.set(index, novo);
@@ -126,7 +126,7 @@ public class Facade {
 
 	public int getX2p(String login) {
 		Usuario buscado = this.buscaUsuario(login);
-		return buscado.getXp2();
+		return buscado.getX2p();
 	}
 
 	private Jogo criaJogo(String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades, String estiloJogo)

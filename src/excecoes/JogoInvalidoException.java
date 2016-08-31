@@ -6,7 +6,7 @@ package excecoes;
  * 
  * @author Tiago Pereira
  */
-public class JogoInvalidoException  extends Exception{
+public class JogoInvalidoException  extends TipoException{
 
 	/**
 	 * 

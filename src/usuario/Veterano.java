@@ -1,5 +1,6 @@
 package usuario;
 
+import excecoes.LojaException;
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
 import jogo.Jogo;
@@ -7,13 +8,13 @@ import jogo.Jogo;
 public class Veterano extends Usuario {
 	public static final double DESCONTO_VETERANO = 0.8;
 
-	public Veterano(String nome, String login) throws StringInvalidaException {
+	public Veterano(String nome, String login) throws StringInvalidaException, ValorInvalidoException {
 		super(nome, login);
 		setX2p(1000);
 	}
 
 	@Override
-	public void compraJogo(Jogo jogo) throws Exception {
+	public void compraJogo(Jogo jogo) throws LojaException {
 		double custo = jogo.getPreco() * DESCONTO_VETERANO;
 		if (custo > this.getCredito()) {
 			throw new ValorInvalidoException("Credito insuficiente para realizar a compra.");
@@ -31,14 +32,7 @@ public class Veterano extends Usuario {
 	public String toString() {
 		String myString = this.getLogin() + FIM_DE_LINHA;
 		myString += this.getNome() + " - Jogador Veterano" + FIM_DE_LINHA;
-		myString += "Lista de Jogos:" + FIM_DE_LINHA;
-		
-		for(Jogo jogo : super.getMeusJogos()){
-			myString += jogo.toString() + FIM_DE_LINHA;
-		}
-		
-		myString += "Total de preco dos jogos: R$ " + this.calculaPrecoTotal() + FIM_DE_LINHA;
-		myString += "--------------------------------------------" + FIM_DE_LINHA;
+		myString += super.toString();
 		return myString;
 	}
 

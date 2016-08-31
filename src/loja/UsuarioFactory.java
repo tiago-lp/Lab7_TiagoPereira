@@ -31,7 +31,7 @@ public class UsuarioFactory {
 	 * @throws Exception
 	 * 		Exception para um tipo invalido.
 	 */
-	public Usuario criaUsuario(String nome, String login, String tipo) throws StringInvalidaException{
+	public Usuario criaUsuario(String nome, String login, String tipo) throws LojaException{
 		if(!(tipo.equalsIgnoreCase("Noob") || tipo.equalsIgnoreCase("Veterano")) || tipo == null){
 			throw new StringInvalidaException("Tipo de usuario invalido.");
 		}

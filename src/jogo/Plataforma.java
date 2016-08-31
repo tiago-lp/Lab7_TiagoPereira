@@ -4,10 +4,11 @@ import java.util.Set;
 
 import excecoes.PrecoInvalidoException;
 import excecoes.StringInvalidaException;
+import excecoes.ValorInvalidoException;
 
 public class Plataforma extends Jogo {
 	public final static int MAXIMUM_SCORE = 100000;
-	public final static int TAXA_XP2 = 20;
+	public final static int TAXA_X2P = 20;
 	public Plataforma(String nome, double preco) throws StringInvalidaException, PrecoInvalidoException {
 		super(nome, preco);
 	}
@@ -17,7 +18,7 @@ public class Plataforma extends Jogo {
 	}
 
 	@Override
-	public int registraJogada(int score, boolean venceu) {
+	public int registraJogada(int score, boolean venceu) throws ValorInvalidoException {
 		setVezesJogadas(getVezesJogadas() + 1);
 		if (score > this.getMaiorScore()) {
 			setMaiorScore(score);
@@ -26,7 +27,7 @@ public class Plataforma extends Jogo {
 		}
 		if (venceu) {
 			setVezesConcluidas(getvezesConcluidas() + 1);
-			return TAXA_XP2;
+			return TAXA_X2P;
 		}
 		return 0;
 	}

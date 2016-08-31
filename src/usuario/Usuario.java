@@ -3,8 +3,10 @@ package usuario;
 import java.util.HashSet;
 import java.util.Set;
 
+import excecoes.LojaException;
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
+import excecoes.JogoInvalidoException;
 import jogo.Jogo;
 
 public abstract class Usuario {
@@ -32,7 +34,7 @@ public abstract class Usuario {
 		this.credito = 0;
 	}
 
-	public abstract void compraJogo(Jogo jogo) throws Exception;
+	public abstract void compraJogo(Jogo jogo) throws LojaException;
 	
 
 	public void adicionaDinheiro(double valor) throws ValorInvalidoException{
@@ -41,47 +43,11 @@ public abstract class Usuario {
 		}
 		this.setCredito(this.credito + valor);
 	}
-	
-	public void setX2p(int novoValor) {
-		this.x2p = novoValor;
-	}
 
-	public int getX2p() {
-		return this.x2p;
-	}
-
-	public void cadastraJogo(Jogo jogo) {
-		this.meusJogos.add(jogo);
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public void setCredito(double novoValor) {
-		this.credito = novoValor;
-	}
-
-	public double getCredito() {
-		return this.credito;
-	}
-
-	public void registradaJogada(String nomeJogo, int score, boolean venceu) throws Exception {
+	public void registradaJogada(String nomeJogo, int score, boolean venceu) throws LojaException {
 		Jogo jogo = this.buscaJogo(nomeJogo);
 		if (jogo == null) {
-			throw new Exception();
+			throw new LojaException();
 		}
 		setX2p(getX2p() + jogo.registraJogada(score, venceu));
 	}
@@ -108,13 +74,12 @@ public abstract class Usuario {
 		}
 		return null;
 	}
-
-	public Set<Jogo> getMeusJogos() {
-		return meusJogos;
-	}
-
-	public void setMeusJogos(Set<Jogo> meusJogos) {
-		this.meusJogos = meusJogos;
+	
+	public void cadastraJogo(Jogo jogo) throws JogoInvalidoException {
+		if(jogo == null){
+			throw new JogoInvalidoException("Jogo nao pode ser nulo.");
+		}
+		this.meusJogos.add(jogo);
 	}
 
 	public double calculaPrecoTotal() {
@@ -126,6 +91,15 @@ public abstract class Usuario {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Usuario) {
 			Usuario temp = (Usuario) obj;
@@ -133,5 +107,68 @@ public abstract class Usuario {
 		} else {
 			return false;
 		}
+	}
+	
+	public String toString(){
+		String myString = "";
+		myString += "Lista de Jogos:" + FIM_DE_LINHA;
+		for(Jogo jogo : getMeusJogos()){
+			myString += jogo.toString() + FIM_DE_LINHA;
+		}
+		myString += "Total de preco dos jogos: R$ " + this.calculaPrecoTotal() + FIM_DE_LINHA;
+		myString += "--------------------------------------------" + FIM_DE_LINHA;
+		return myString;
+	}
+
+	public void setX2p(int novoValor) throws ValorInvalidoException {
+		if(novoValor < 0){
+			throw new ValorInvalidoException("Valor do X2P nao pode ser negativo.");
+		}
+		this.x2p = novoValor;
+	}
+
+	public int getX2p() {
+		return this.x2p;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) throws StringInvalidaException {
+		if(nome == null || nome.trim().isEmpty()){
+			throw new StringInvalidaException("Nome nao pode ser nulo ou vazio.");
+		}
+		this.nome = nome;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) throws StringInvalidaException {
+		if(login == null || login.trim().isEmpty()){
+			throw new StringInvalidaException("Login nao pode ser nulo ou vazio.");
+		}
+		this.login = login;
+	}
+
+	public void setCredito(double novoValor) throws ValorInvalidoException {
+		if(novoValor < 0){
+			throw new ValorInvalidoException("Valor do saldo nao pode ser negativo.");
+		}
+		this.credito = novoValor;
+	}
+
+	public double getCredito() {
+		return this.credito;
+	}
+	
+	public Set<Jogo> getMeusJogos() {
+		return meusJogos;
+	}
+
+	public void setMeusJogos(Set<Jogo> meusJogos) {
+		this.meusJogos = meusJogos;
 	}
 }

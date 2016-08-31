@@ -5,7 +5,7 @@ package excecoes;
  * 
  * @author Tiago Pereira
  */
-public class UsuarioInvalidoException extends Exception{
+public class UsuarioInvalidoException extends TipoException{
 
 	/**
 	 * 

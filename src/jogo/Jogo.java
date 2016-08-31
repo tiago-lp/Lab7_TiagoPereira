@@ -5,6 +5,7 @@ import java.util.Set;
 
 import excecoes.PrecoInvalidoException;
 import excecoes.StringInvalidaException;
+import excecoes.ValorInvalidoException;
 
 public abstract class Jogo {
 	public static final String FIM_DE_LINHA = System.lineSeparator();
@@ -51,21 +52,38 @@ public abstract class Jogo {
 		this.jogabilidades = jogabilidades;
 	}
 
-	public abstract int registraJogada(int score, boolean venceu);
+	public abstract int registraJogada(int score, boolean venceu)throws ValorInvalidoException;
 
 	public double getPreco() {
 		return this.preco;
 	}
+	
+	public void setPreco(double novoPreco)throws PrecoInvalidoException{
+		if (novoPreco < 0) {
+			throw new PrecoInvalidoException("Preco nao pode ser negativo");
+		}
+		this.preco = novoPreco;
+	}
 
-	public String getNome() {
+	public String getNome(){
 		return this.nome;
+	}
+	
+	public void setNome(String novoNome)throws StringInvalidaException {
+		if (novoNome == null || novoNome.trim().isEmpty()) {
+			throw new StringInvalidaException("Nome nao pode ser nulo ou vazio.");
+		}
+		this.nome = novoNome;
 	}
 
 	public int getMaiorScore() {
 		return this.maiorScore;
 	}
 
-	public void setMaiorScore(int novoScore) {
+	public void setMaiorScore(int novoScore) throws ValorInvalidoException {
+		if(novoScore < 0){
+			throw new ValorInvalidoException("Score nao pode ser negativo.");
+		}
 		this.maiorScore = novoScore;
 	}
 
@@ -73,7 +91,10 @@ public abstract class Jogo {
 		return this.vezesConcluidas;
 	}
 
-	public void setVezesConcluidas(int novaQuantidade) {
+	public void setVezesConcluidas(int novaQuantidade) throws ValorInvalidoException {
+		if(novaQuantidade < 0){
+			throw new ValorInvalidoException("Vezes zeradas nao pode ser negativo.");
+		}
 		this.vezesConcluidas = novaQuantidade;
 	}
 
@@ -81,7 +102,10 @@ public abstract class Jogo {
 		return this.vezesJogadas;
 	}
 
-	public void setVezesJogadas(int novaQuantidade) {
+	public void setVezesJogadas(int novaQuantidade) throws ValorInvalidoException {
+		if(novaQuantidade < 0){
+			throw new ValorInvalidoException("Vezes jogadas nao pode ser negativo.");
+		}
 		this.vezesJogadas = novaQuantidade;
 	}
 	
