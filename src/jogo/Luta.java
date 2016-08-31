@@ -30,7 +30,7 @@ public class Luta extends Jogo{
 	}
 	
 	public String toString() {
-		String resultado = getNome() + " - Luta:" + FIM_DE_LINHA;
+		String resultado = "+ " + getNome() + " - Luta:" + FIM_DE_LINHA;
 		resultado += super.toString();
 		return resultado;
 	}

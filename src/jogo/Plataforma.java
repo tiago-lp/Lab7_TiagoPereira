@@ -33,7 +33,7 @@ public class Plataforma extends Jogo {
 	}
 
 	public String toString() {
-		String resultado = getNome() + " - Plataforma:" + FIM_DE_LINHA;
+		String resultado = "+ " + getNome() + " - Plataforma:" + FIM_DE_LINHA;
 		resultado += super.toString();
 		return resultado;
 	}

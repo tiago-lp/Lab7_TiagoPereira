@@ -30,8 +30,8 @@ public class Veterano extends Usuario {
 
 	@Override
 	public String toString() {
-		String myString = this.getLogin() + FIM_DE_LINHA;
-		myString += this.getNome() + " - Jogador Veterano" + FIM_DE_LINHA;
+		String myString = "Jogador Veterano: " + this.getLogin() + FIM_DE_LINHA;
+		myString += this.getNome() + " - " + this.getX2p() + " x2p" + FIM_DE_LINHA;
 		myString += super.toString();
 		return myString;
 	}

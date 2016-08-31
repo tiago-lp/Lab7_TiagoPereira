@@ -31,8 +31,8 @@ public class Noob extends Usuario {
 
 	@Override
 	public String toString() {
-		String myString = this.getLogin() + FIM_DE_LINHA;
-		myString += this.getNome() + " - Jogador Noob" + FIM_DE_LINHA;
+		String myString = "Jogador Noob: " + this.getLogin() + FIM_DE_LINHA;
+		myString += this.getNome() + " - " + this.getX2p() + " x2p" + FIM_DE_LINHA;
 		myString += super.toString();
 		return myString;
 	}
