@@ -37,7 +37,7 @@ public class LojaController {
 	 * @return
 	 * 		Boolean indicando se foi cadastrado(True) ou nao(False).
 	 */
-	public boolean adicionaUsuario(String nome, String login, String tipo) throws LojaException{
+	public boolean criaUsuario(String nome, String login, String tipo) throws LojaException{
 		Usuario novo = fabricaUsuario.criaUsuario(nome, login, tipo);
 		return this.usuarios.add(novo);
 	}
@@ -192,18 +192,26 @@ public class LojaController {
 	 * 		Quando: 1. Login eh nulo ou vazio;
 	 * 				2. valor eh menor que zero.
 	 */
-	public boolean adicionaDinheiro(String login, double valor) throws LojaException {
-		if(contemUsuario(login)){
-			Usuario user = getUsuario(login);
-			user.adicionaDinheiro(valor);
-			return true;
-		}else{
-			return false;
+	public void adicionaCredito(String login, double valor) throws LojaException {
+		if(!contemUsuario(login)){
+			throw new UsuarioInvalidoException("Usuario invalido.");
 		}
+		Usuario user = getUsuario(login);
+		user.adicionaDinheiro(valor);
+		
+	}
+	
+	public double confereCredito(String login) throws LojaException{
+		if(!contemUsuario(login)){
+			throw new UsuarioInvalidoException("Usuario invalido.");
+		}
+		Usuario user = getUsuario(login);
+		double credito = user.getCredito();
+		return credito;
 	}
 	
 	
-	public void vendeJogo(String loginUser, String jogoNome, double preco, String jogabilidades, String tipo)throws LojaException{
+	public void vendeJogo(String jogoNome, double preco, String jogabilidades, String tipo, String loginUser)throws LojaException{
 		if(contemUsuario(loginUser) && contemJogo(jogoNome)){
 			vendeJogo(loginUser, jogoNome);
 		}
@@ -220,6 +228,14 @@ public class LojaController {
 			Jogo jogo = getJogo(jogoNome);
 			usuario.compraJogo(jogo);
 		}
+	}
+	
+	public int getX2p(String login) throws LojaException{
+		if(!contemUsuario(login)){
+			throw new UsuarioInvalidoException("Usuario invalido.");
+		}
+		Usuario user = getUsuario(login);
+		return user.getX2p();
 	}
 	
 	/**

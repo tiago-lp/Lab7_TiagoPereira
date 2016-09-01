@@ -172,10 +172,10 @@ public class Facade {
 
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		args = new String[] { "loja.Facade", "acceptance_test/us1.txt", "acceptance_test/us2.txt",  "acceptance_test/us3.txt" };
 		EasyAccept.main(args);
 
-	}
+	}*/
 
 }

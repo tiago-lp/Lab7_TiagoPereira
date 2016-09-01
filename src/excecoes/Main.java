@@ -19,9 +19,9 @@ public class Main {
 		a.cadastraJogo(mario);
 		a.cadastraJogo(joreuj);
 		
-		loja.adicionaUsuario("Eu", "leonhart", "Veterano");
-		loja.adicionaDinheiro("leonhart", 50000);
-		loja.vendeJogo("leonhart", "Mario", 15, "offline, multiplayer, cooperativo", "plataforma");
+		loja.criaUsuario("Eu", "leonhart", "Veterano");
+		loja.adicionaCredito("leonhart", 50000);
+		loja.vendeJogo("Mario", 15, "offline, multiplayer, cooperativo", "plataforma", "leonhart");
 		System.out.println(loja);
 	}
 

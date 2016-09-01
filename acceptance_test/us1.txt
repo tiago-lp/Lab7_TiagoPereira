@@ -1,15 +1,14 @@
-#  Laboratorio 6  
+#  Laboratorio 7  
 
 #  Criacao de Usuarios
 
-adicionaUsuario nome="Despoina" login="despoina.solaris"
-adicionaUsuario nome="Alpanu" login="alpanu.destroctu"
-adicionaUsuario nome="Typhon" login="typhon.moira"
-adicionaUsuario nome="Achlae" login="achlae.sotare"
-adicionaUsuario nome="Aita" login="aita.mortis"
+criaUsuario nome="Despoina" login="despoina.solaris" tipoUsuario="noob"
+criaUsuario nome="Alpanu" login="alpanu.destroctu" tipoUsuario="noob"
+criaUsuario nome="Typhon" login="typhon.moira" tipoUsuario="noob"
+criaUsuario nome="Achlae" login="achlae.sotare" tipoUsuario="noob"
+criaUsuario nome="Aita" login="aita.mortis" tipoUsuario="noob"
 
 # Adiciona Credito
-
 
 adicionaCredito login="despoina.solaris" credito=1000
 adicionaCredito login="alpanu.destroctu" credito=99

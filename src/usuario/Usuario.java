@@ -9,7 +9,7 @@ import excecoes.ValorInvalidoException;
 import excecoes.JogoInvalidoException;
 import jogo.Jogo;
 
-public abstract class Usuario {
+public class Usuario {
 
 	public static final String FIM_DE_LINHA = System.lineSeparator();
 
@@ -17,7 +17,7 @@ public abstract class Usuario {
 	private String login;
 	private Set<Jogo> meusJogos;
 	private double credito;
-	private int x2p;
+	private TipoDeUsuario status;
 
 	public Usuario(String nome, String login) throws StringInvalidaException {
 
@@ -32,9 +32,29 @@ public abstract class Usuario {
 		this.login = login;
 		this.meusJogos = new HashSet<Jogo>();
 		this.credito = 0;
+		this.status = new Noob();
 	}
 
-	public abstract void compraJogo(Jogo jogo) throws LojaException;
+	public void compraJogo(Jogo jogo) throws LojaException{
+		double custo = status.compraJogo(jogo);
+		if (custo > this.getCredito()) {
+			throw new ValorInvalidoException("Credito insuficiente para realizar a compra.");
+		} else {
+			int parteInteira =(int)( jogo.getPreco() - (jogo.getPreco() % 1));
+			int bonusXp =  parteInteira * status.getBonus();
+			setX2p(getX2p() + bonusXp);
+			setCredito(getCredito() - custo);
+			this.cadastraJogo(jogo);
+		}
+	}
+	
+	public void recompensar(String jogoNome, int scoreObtido, boolean zerou) throws LojaException{
+		
+	}
+	
+	public void punir(String jogoNome, int scoreObtido, boolean zerou) throws LojaException{
+		
+	}
 	
 
 	public void adicionaDinheiro(double valor) throws ValorInvalidoException{
@@ -110,7 +130,9 @@ public abstract class Usuario {
 	}
 	
 	public String toString(){
-		String myString = "";
+		String myString = status.toString() + this.getLogin() + FIM_DE_LINHA;
+		myString += this.getNome() + " - " + this.getX2p() + " x2p" + FIM_DE_LINHA;
+		myString += super.toString();;
 		myString += "Lista de Jogos:" + FIM_DE_LINHA;
 		for(Jogo jogo : getMeusJogos()){
 			myString += jogo.toString() + FIM_DE_LINHA;

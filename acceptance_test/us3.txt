@@ -1,19 +1,59 @@
-#  Laboratorio 6  
+#  Laboratorio 7
+ 
 
-# Registra Jogadas
-
-registraJogada login="alpanu.destroctu" nomeJogo="Mega Man" score=50 venceu=false
-registraJogada login="alpanu.destroctu" nomeJogo="Mega Man" score=100 venceu=false
-registraJogada login="alpanu.destroctu" nomeJogo="Mega Man" score=170 venceu=true
-registraJogada login="achlae.sotare" nomeJogo="Street Fighter" score=10000 venceu=false
-registraJogada login="achlae.sotare" nomeJogo="Street Fighter" score=20000 venceu=false
-registraJogada login="achlae.sotare" nomeJogo="Street Fighter" score=28000 venceu=false
-registraJogada login="achlae.sotare" nomeJogo="Street Fighter" score=35000 venceu=true
-registraJogada login="aita.mortis" nomeJogo="Fatal Fury" score=15000 venceu=false
-registraJogada login="aita.mortis" nomeJogo="Fatal Fury" score=27000 venceu=false
+# Punir Usuarios
+punir login="despoina.solaris" nomeJogo="Marvel vs Capcom" scoreObtido=1000 zerou=false
+punir login="despoina.solaris" nomeJogo="Marvel vs Capcom" scoreObtido=2000 zerou=true
+punir login="despoina.solaris" nomeJogo="Marvel vs Capcom" scoreObtido=2000 zerou=false
+punir login="alpanu.destroctu" nomeJogo="Mega Man" scoreObtido=100 zerou=false
+punir login="alpanu.destroctu" nomeJogo="Mega Man" scoreObtido=200 zerou=false
+punir login="alpanu.destroctu" nomeJogo="Arena" scoreObtido=30 zerou=false
+punir login="typhon.moira" nomeJogo="Fallout 3" scoreObtido=500 zerou=false
+punir login="typhon.moira" nomeJogo="Fallout 4" scoreObtido=500 zerou=false
+punir login="typhon.moira" nomeJogo="Fallout 4" scoreObtido=400 zerou=false
+punir login="achlae.sotare" nomeJogo="Street Fighter" scoreObtido=3000 zerou=false
+punir login="achlae.sotare" nomeJogo="Street Fighter" scoreObtido=3000 zerou=false
+punir login="achlae.sotare" nomeJogo="Street Fighter" scoreObtido=9000 zerou=true
+punir login="achlae.sotare" nomeJogo="Street Fighter" scoreObtido=0 zerou=false
+punir login="achlae.sotare" nomeJogo="Street Fighter" scoreObtido=3000 zerou=false
+punir login="achlae.sotare" nomeJogo="Street Fighter" scoreObtido=2000 zerou=false
+punir login="aita.mortis" nomeJogo="Fatal Fury" scoreObtido=1000 zerou=false
+punir login="aita.mortis" nomeJogo="Simpsons vs Family Guy" scoreObtido=3000 zerou=false
+punir login="aita.mortis" nomeJogo="Fatal Fury" scoreObtido=5000 zerou=false
+punir login="aita.mortis" nomeJogo="Simpsons vs Family Guy" scoreObtido=7000 zerou=false
 
 # Confere X2p
+expect 6335 getX2p login="despoina.solaris"
+expect 1750 getX2p login="alpanu.destroctu"
+expect 5230 getX2p login="typhon.moira"
+expect 990 getX2p login="achlae.sotare"
+expect 1216 getX2p login="aita.mortis"
 
+
+
+#Recompensar Usuarios
+
+recompensar login="despoina.solaris" nomeJogo="Mario64" scoreObtido=1000 zerou=false
+recompensar login="despoina.solaris" nomeJogo="Mario64" scoreObtido=10000 zerou=false
+recompensar login="despoina.solaris" nomeJogo="Mario64" scoreObtido=30000 zerou=true
+recompensar login="alpanu.destroctu" nomeJogo="Mega Man" scoreObtido=30000 zerou=true
+recompensar login="alpanu.destroctu" nomeJogo="Arena" scoreObtido=20000 zerou=true
+recompensar login="typhon.moira" nomeJogo="Fallout 4" scoreObtido=10000 zerou=false
+recompensar login="typhon.moira" nomeJogo="Fallout 3" scoreObtido=15000 zerou=false
+recompensar login="typhon.moira" nomeJogo="Fallout 3" scoreObtido=30000 zerou=false
+recompensar login="typhon.moira" nomeJogo="Fallout 4" scoreObtido=30000 zerou=false
+recompensar login="typhon.moira" nomeJogo="Fallout 4" scoreObtido=30000 zerou=true
+recompensar login="achlae.sotare" nomeJogo="Marvel vs Capcom" scoreObtido=28888 zerou=true
+recompensar login="achlae.sotare" nomeJogo="Marvel vs Capcom" scoreObtido=28764 zerou=true
+recompensar login="achlae.sotare" nomeJogo="Marvel vs Capcom" scoreObtido=28923 zerou=true
+recompensar login="achlae.sotare" nomeJogo="Marvel vs Capcom" scoreObtido=29873 zerou=true
+recompensar login="achlae.sotare" nomeJogo="Marvel vs Capcom" scoreObtido=29911 zerou=true
+
+
+# Confere X2p
+expect 6365 getX2p login="despoina.solaris"
 expect 1820 getX2p login="alpanu.destroctu"
-expect 1243 getX2p login="achlae.sotare" 
-expect 1322 getX2p login="aita.mortis" 
+expect 5430	getX2p login="typhon.moira"
+expect 1182 getX2p login="achlae.sotare"
+
+

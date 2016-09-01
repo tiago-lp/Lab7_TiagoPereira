@@ -1,4 +1,4 @@
-#  Laboratorio 6  
+#  Laboratorio 7 
 
 # Vende Jogo
 vendeJogo jogoNome="Mario64" preco=89 jogabilidades="offline multiplayer" estiloJogo="rpg" loginUser="despoina.solaris"
@@ -12,16 +12,10 @@ vendeJogo jogoNome="Fatal Fury" preco=20 jogabilidades="competitivo multiplayer"
 vendeJogo jogoNome="Simpsons vs Family Guy" preco=8 jogabilidades="competitivo multiplayer" estiloJogo="luta" loginUser="aita.mortis"
 
 
-
-
 # Realiza Upgrade 
 
 upgrade login="despoina.solaris"
 upgrade login="typhon.moira"
-expectError "Upgrade impossivel de ser realizado, usuario ja eh veterano" upgrade login="despoina.solaris"
-expectError "Impossivel realizar upgrade, quantidade de x2p insuficiente!" upgrade login="alpanu.destroctu"
-expectError "Impossivel realizar upgrade, quantidade de x2p insuficiente!" upgrade login="achlae.sotare"
-expectError "Impossivel realizar upgrade, quantidade de x2p insuficiente!" upgrade login="aita.mortis"
 
 # Recupera o XP2 do Usuario
 
