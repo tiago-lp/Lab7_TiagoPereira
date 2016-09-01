@@ -1,6 +1,5 @@
-/exceptions/
 /excecoes/
-/jogo/
-/usuario/
-/loja/
 /facade/
+/jogo/
+/loja/
+/usuario/
