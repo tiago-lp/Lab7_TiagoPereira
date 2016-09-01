@@ -17,6 +17,7 @@ public class Usuario {
 	private String login;
 	private Set<Jogo> meusJogos;
 	private double credito;
+	private int x2p;
 	private TipoDeUsuario status;
 
 	public Usuario(String nome, String login) throws StringInvalidaException {
@@ -32,6 +33,7 @@ public class Usuario {
 		this.login = login;
 		this.meusJogos = new HashSet<Jogo>();
 		this.credito = 0;
+		this.x2p = 0;
 		this.status = new Noob();
 	}
 
@@ -49,11 +51,24 @@ public class Usuario {
 	}
 	
 	public void recompensar(String jogoNome, int scoreObtido, boolean zerou) throws LojaException{
-		
+		if(!contemJogo(jogoNome)){
+			throw new JogoInvalidoException("Usuario nao possui o jogo.");
+		}
+		Jogo jogo = buscaJogo(jogoNome);
+		jogo.registraJogada(scoreObtido, zerou);
+		int recompensa = status.recompensar(jogo);
+		setX2p(this.getX2p() + recompensa);
+	
 	}
 	
 	public void punir(String jogoNome, int scoreObtido, boolean zerou) throws LojaException{
-		
+		if(!contemJogo(jogoNome)){
+			throw new JogoInvalidoException("Usuario nao possui o jogo.");
+		}
+		Jogo jogo = buscaJogo(jogoNome);
+		jogo.registraJogada(scoreObtido, zerou);
+		int punicao = status.punir(jogo);
+		setX2p(this.getX2p() + punicao);
 	}
 	
 

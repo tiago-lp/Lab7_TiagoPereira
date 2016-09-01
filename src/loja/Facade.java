@@ -33,8 +33,8 @@ public class Facade {
 
 	public void adicionaUsuario(String nome, String login) {
 		try {
-			Usuario novoUser = new Noob(nome, login);
-			meusUsuarios.add(novoUser);
+			//Usuario novoUser = new Noob(nome, login);
+			//meusUsuarios.add(novoUser);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

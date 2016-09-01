@@ -6,16 +6,15 @@ import java.util.Set;
 import excecoes.LojaException;
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
+import jogo.Jogabilidade;
 import jogo.Jogo;
 
 public class Noob implements TipoDeUsuario {
 	public static final double DESCONTO_NOOB = 0.9;
 	public static final String FIM_DE_LINHA = System.lineSeparator();
-	private int x2p;
 	private int bonus;
 	
 	public Noob(){
-		this.x2p = 0;
 		this.bonus = 10;
 	}
 
@@ -25,16 +24,6 @@ public class Noob implements TipoDeUsuario {
 		return custo;
 	}
 	
-	public int getX2p(){
-		return this.x2p;
-	}
-	
-	public void setX2p(int x2p) throws ValorInvalidoException{
-		if(x2p < 0){
-			throw new ValorInvalidoException("X2p nao pode ser negativo.");
-		}
-		this.x2p = x2p;
-	}
 	
 	public int getBonus(){
 		return this.bonus;
@@ -42,21 +31,37 @@ public class Noob implements TipoDeUsuario {
 	
 	@Override
 	public String toString() {
-		String myString = "Jogador Noob: ";
-		return myString;
+		return "Jogador Noob: ";
 	}
 
 	@Override
-	public void recompensar(String nomeJogo, int scoreObtido, boolean zerou)
+	public int recompensar(Jogo jogo)
 			throws LojaException {
-		// TODO Auto-generated method stub
+		int recompensa = 0;
+		if(jogo.getJogabilidades().contains(Jogabilidade.OFFLINE)){
+			recompensa += 30;
+		}
+		if(jogo.getJogabilidades().contains(Jogabilidade.MULTIPLAYER)){
+			recompensa += 10;
+		}
+		return recompensa;
 		
 	}
 
 	@Override
-	public void punir(String nomeJogo, int scoreObtido, boolean zerou)
+	public int punir(Jogo jogo)
 			throws LojaException {
-		// TODO Auto-generated method stub
+		int punicao = 0;
+		if(jogo.getJogabilidades().contains(Jogabilidade.ONLINE)){
+			punicao -= 10;
+		}
+		if(jogo.getJogabilidades().contains(Jogabilidade.COMPETITIVO)){
+			punicao -= 20;
+		}
+		if(jogo.getJogabilidades().contains(Jogabilidade.COOPERATIVO)){
+			punicao -= 50;
+		}
+		return punicao;
 		
 	}
 
