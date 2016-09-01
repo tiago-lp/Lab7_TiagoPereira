@@ -1,39 +1,55 @@
 package usuario;
 
-import excecoes.LojaException;
-import excecoes.StringInvalidaException;
-import excecoes.ValorInvalidoException;
+import jogo.Jogabilidade;
 import jogo.Jogo;
 
-public class Veterano extends Usuario {
+public class Veterano implements TipoDeUsuario {
 	public static final double DESCONTO_VETERANO = 0.8;
+	private int bonus;
 
-	public Veterano(String nome, String login) throws StringInvalidaException, ValorInvalidoException {
-		super(nome, login);
-		setX2p(1000);
+	public Veterano() {
+		this.bonus = 15;
 	}
 
 	@Override
-	public void compraJogo(Jogo jogo) throws LojaException {
+	public double compraJogo(Jogo jogo) {
 		double custo = jogo.getPreco() * DESCONTO_VETERANO;
-		if (custo > this.getCredito()) {
-			throw new ValorInvalidoException("Credito insuficiente para realizar a compra.");
-		} else {
-			int parteInteira =(int)( jogo.getPreco() - (jogo.getPreco() % 1));
-			int bonusXp =  parteInteira * 15;
-			setX2p(getX2p() + bonusXp);
-			setCredito(getCredito() - custo);
-			this.cadastraJogo(jogo);
-
-		}
+		return custo;
 	}
 
+	@Override
+	public int recompensar(Jogo jogo){
+		int recompensa = 0;
+		if(jogo.getJogabilidades().contains(Jogabilidade.ONLINE)){
+			recompensa += 10;
+		}
+		if(jogo.getJogabilidades().contains(Jogabilidade.COOPERATIVO)){
+			recompensa += 20;
+		}
+		return recompensa;
+		
+	}
+
+	@Override
+	public int punir(Jogo jogo) {
+		int punicao = 0;
+		if(jogo.getJogabilidades().contains(Jogabilidade.COMPETITIVO)){
+			punicao -= 20;
+		}
+		if(jogo.getJogabilidades().contains(Jogabilidade.OFFLINE)){
+			punicao -= 20;
+		}
+		return punicao;	
+	}
+	
+	
+	public int getBonus(){
+		return this.bonus;
+	}
+	
 	@Override
 	public String toString() {
-		String myString = "Jogador Veterano: " + this.getLogin() + FIM_DE_LINHA;
-		myString += this.getNome() + " - " + this.getX2p() + " x2p" + FIM_DE_LINHA;
-		myString += super.toString();
-		return myString;
+		return "Jogador Veterano: ";
 	}
 
 }

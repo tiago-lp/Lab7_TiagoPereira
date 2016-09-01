@@ -45,6 +45,30 @@ public class LojaFacade {
 		}
 	}
 	
+	public void upgrade(String login){
+		try {
+			loja.upgrade(login);
+		} catch (LojaException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void punir(String login, String jogoNome, int scoreObtido, boolean zerou){
+		try{
+			loja.punir(login, jogoNome, scoreObtido, zerou);
+		}catch(LojaException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void recompensar(String login, String jogoNome, int scoreObtido, boolean zerou){
+		try{
+			loja.recompensar(login, jogoNome, scoreObtido, zerou);
+		}catch(LojaException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	public int getX2p(String login){
 		try{
 			return loja.getX2p(login);

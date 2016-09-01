@@ -1,17 +1,10 @@
 package usuario;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import excecoes.LojaException;
-import excecoes.StringInvalidaException;
-import excecoes.ValorInvalidoException;
 import jogo.Jogabilidade;
 import jogo.Jogo;
 
 public class Noob implements TipoDeUsuario {
 	public static final double DESCONTO_NOOB = 0.9;
-	public static final String FIM_DE_LINHA = System.lineSeparator();
 	private int bonus;
 	
 	public Noob(){
@@ -19,24 +12,13 @@ public class Noob implements TipoDeUsuario {
 	}
 
 	@Override
-	public double compraJogo(Jogo jogo) throws LojaException{
+	public double compraJogo(Jogo jogo){
 		double custo = jogo.getPreco() * DESCONTO_NOOB;
 		return custo;
 	}
 	
-	
-	public int getBonus(){
-		return this.bonus;
-	}
-	
 	@Override
-	public String toString() {
-		return "Jogador Noob: ";
-	}
-
-	@Override
-	public int recompensar(Jogo jogo)
-			throws LojaException {
+	public int recompensar(Jogo jogo){
 		int recompensa = 0;
 		if(jogo.getJogabilidades().contains(Jogabilidade.OFFLINE)){
 			recompensa += 30;
@@ -49,8 +31,7 @@ public class Noob implements TipoDeUsuario {
 	}
 
 	@Override
-	public int punir(Jogo jogo)
-			throws LojaException {
+	public int punir(Jogo jogo){
 		int punicao = 0;
 		if(jogo.getJogabilidades().contains(Jogabilidade.ONLINE)){
 			punicao -= 10;
@@ -62,7 +43,16 @@ public class Noob implements TipoDeUsuario {
 			punicao -= 50;
 		}
 		return punicao;
-		
+	}
+	
+
+	public int getBonus(){
+		return this.bonus;
+	}
+	
+	@Override
+	public String toString() {
+		return "Jogador Noob: ";
 	}
 
 }

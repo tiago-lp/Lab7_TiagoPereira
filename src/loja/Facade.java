@@ -21,7 +21,7 @@ import usuario.Usuario;
 import usuario.Veterano;
 
 public class Facade {
-	public static final String FIM_DE_LINHA = System.lineSeparator();
+	/*public static final String FIM_DE_LINHA = System.lineSeparator();
 	
 	private List<Usuario> meusUsuarios;
 	private HashMap<String, Jogabilidade> mapJogabildades;
@@ -172,7 +172,7 @@ public class Facade {
 
 	}
 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		args = new String[] { "loja.Facade", "acceptance_test/us1.txt", "acceptance_test/us2.txt",  "acceptance_test/us3.txt" };
 		EasyAccept.main(args);
 

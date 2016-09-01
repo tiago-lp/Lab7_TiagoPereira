@@ -42,7 +42,7 @@ public class Usuario {
 		if (custo > this.getCredito()) {
 			throw new ValorInvalidoException("Credito insuficiente para realizar a compra.");
 		} else {
-			int parteInteira =(int)( jogo.getPreco() - (jogo.getPreco() % 1));
+			int parteInteira =(int)jogo.getPreco();
 			int bonusXp =  parteInteira * status.getBonus();
 			setX2p(getX2p() + bonusXp);
 			setCredito(getCredito() - custo);
@@ -55,10 +55,9 @@ public class Usuario {
 			throw new JogoInvalidoException("Usuario nao possui o jogo.");
 		}
 		Jogo jogo = buscaJogo(jogoNome);
-		jogo.registraJogada(scoreObtido, zerou);
+		int x2pJogada = jogo.registraJogada(scoreObtido, zerou);
 		int recompensa = status.recompensar(jogo);
-		setX2p(this.getX2p() + recompensa);
-	
+		setX2p(this.getX2p() + recompensa + x2pJogada);
 	}
 	
 	public void punir(String jogoNome, int scoreObtido, boolean zerou) throws LojaException{
@@ -66,9 +65,9 @@ public class Usuario {
 			throw new JogoInvalidoException("Usuario nao possui o jogo.");
 		}
 		Jogo jogo = buscaJogo(jogoNome);
-		jogo.registraJogada(scoreObtido, zerou);
+		int x2pJogada = jogo.registraJogada(scoreObtido, zerou);
 		int punicao = status.punir(jogo);
-		setX2p(this.getX2p() + punicao);
+		setX2p(this.getX2p() + punicao + x2pJogada);
 	}
 	
 
@@ -77,14 +76,6 @@ public class Usuario {
 			throw new ValorInvalidoException("Valor que deseja adicionar ao saldo nao pode ser negativo.");
 		}
 		this.setCredito(this.credito + valor);
-	}
-
-	public void registradaJogada(String nomeJogo, int score, boolean venceu) throws LojaException {
-		Jogo jogo = this.buscaJogo(nomeJogo);
-		if (jogo == null) {
-			throw new LojaException();
-		}
-		setX2p(getX2p() + jogo.registraJogada(score, venceu));
 	}
 	
 	public boolean contemJogo(String nomeJogo) throws StringInvalidaException {
@@ -97,6 +88,14 @@ public class Usuario {
 			}
 		}
 		return false;
+	}
+	
+	public void upgrade(){
+		this.status = new Veterano();
+	}
+	
+	public void downgrade(){
+		this.status = new Noob();
 	}
 
 	public Jogo buscaJogo(String nomeJogo) throws StringInvalidaException{

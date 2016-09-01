@@ -230,6 +230,23 @@ public class LojaController {
 		}
 	}
 	
+	public void punir(String login, String jogoNome, int scoreObtido, boolean zerou) throws LojaException {
+		if(!contemUsuario(login)){
+			throw new UsuarioInvalidoException("Usuario inexistente.");
+		}
+		Usuario user = getUsuario(login);
+		user.punir(jogoNome, scoreObtido, zerou);
+	}
+	
+	public void recompensar(String login, String jogoNome, int scoreObtido, boolean zerou) throws LojaException {
+		if(!contemUsuario(login)){
+			throw new UsuarioInvalidoException("Usuario inexistente.");
+		}
+		Usuario user = getUsuario(login);
+		user.recompensar(jogoNome, scoreObtido, zerou);	
+	}
+	
+	
 	public int getX2p(String login) throws LojaException{
 		if(!contemUsuario(login)){
 			throw new UsuarioInvalidoException("Usuario invalido.");
@@ -238,43 +255,28 @@ public class LojaController {
 		return user.getX2p();
 	}
 	
-	/**
-	 * Faz o upgrade de um Usuario Noob para Veterano caso ele seja Noob e tenha x2p maior ou igual a 1000.
-	 * @param login
-	 * 		Login do usuario que ira realizar upgrade.
-	 * @return
-	 * 		Boolean indicando se o usuario fez upgrade(true) ou nao(false).
-	 * @throws SteamException
-	 * 		Quando o usuario nao existe; ja eh veterano ou nao possui x2p para realizar o upgrade.
-	 */
-	public boolean upgrade(String login) throws LojaException{
+	public void upgrade(String login) throws LojaException{
 		if(!contemUsuario(login)){
 			throw new UsuarioInvalidoException("Usuario inexistente.");
 		}
-		Usuario noob = getUsuario(login);
+
+		Usuario user = getUsuario(login);
 		
-		if(!fabricaUsuario.verificaNoob(noob)){
-			throw new UsuarioInvalidoException("Usuario ja eh veterano.");
+		if(user.getX2p() < 1000){
+			throw new UpgradeInvalidoException("X2p insuficiente para fazer upgrade.");
 		}
-		
-		if(noob.getX2p() < 1000){
-			throw new ValorInvalidoException("X2p insuficiente para fazer upgrade.");
+		user.upgrade();
+	}
+	
+	public void downgrade(String login) throws LojaException{
+		if(!contemUsuario(login)){
+			throw new UsuarioInvalidoException("Usuario inexistente.");
 		}
+		Usuario user = getUsuario(login);
 		
-		String nome = noob.getNome();
-		String userlogin = noob.getLogin();
-		Set<Jogo> jogos = noob.getMeusJogos();
-		double saldo = noob.getCredito();
-		int x2p = noob.getX2p();
-		
-		Usuario veterano = fabricaUsuario.criaUsuario(nome, userlogin, "veterano");
-		veterano.setMeusJogos(jogos);
-		veterano.setCredito(saldo);
-		veterano.setX2p(x2p);
-		
-		this.usuarios.remove(noob);
-		
-		return this.usuarios.add(veterano);
+		if(user.getX2p() < 1000){
+			user.downgrade();
+		}
 	}
 	
 

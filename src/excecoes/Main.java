@@ -6,7 +6,7 @@ import loja.*;
 public class Main {
 
 	public static void main(String[] args) throws LojaException {
-		LojaController loja = new LojaController();
+		/*LojaController loja = new LojaController();
 		
 		Jogo mario = new Plataforma("Super Mario", 15);
 		mario.setMaiorScore(5000);
@@ -23,6 +23,6 @@ public class Main {
 		loja.adicionaCredito("leonhart", 50000);
 		loja.vendeJogo("Mario", 15, "offline, multiplayer, cooperativo", "plataforma", "leonhart");
 		System.out.println(loja);
+	*/
 	}
-
 }
