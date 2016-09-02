@@ -197,8 +197,6 @@ public class LojaController {
 	 * 		Login do usuario ao qual o saldo ira ser adicionado.
 	 * @param valor
 	 * 		Valor que ira ser adicionado ao saldo do usuario.
-	 * @return
-	 * 		Boolean indicando se o saldo foi adicionado(true) ou nao(false).
 	 * @throws LojaException
 	 * 		Quando: 1. Login eh nulo ou vazio;
 	 * 				2. valor eh menor que zero.
