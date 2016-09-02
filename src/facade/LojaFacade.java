@@ -158,6 +158,17 @@ public class LojaFacade {
 		}
 	}
 	
+	/**
+	 * ToString
+	 */
+	public String toString(){
+		return loja.toString();
+	}
+	
+	/**
+	 * Testes EasyAccept
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		args = new String[] { "facade.LojaFacade", "acceptance_test/us1.txt", "acceptance_test/us2.txt",  "acceptance_test/us3.txt" };
 		EasyAccept.main(args);

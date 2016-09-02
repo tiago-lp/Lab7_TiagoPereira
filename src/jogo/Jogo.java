@@ -41,7 +41,7 @@ public abstract class Jogo {
 			throw new StringInvalidaException("Nome nao pode ser nulo ou vazio.");
 		}
 		if (preco < 0) {
-			throw new PrecoInvalidoException("Preco nao pode ser negativo");
+			throw new PrecoInvalidoException("Preco nao pode ser negativo.");
 		}
 
 		this.nome = nome;
