@@ -3,20 +3,35 @@ package usuario;
 import jogo.Jogabilidade;
 import jogo.Jogo;
 
+/**
+ * Classe Noob que implementa o comportamento da interface TipodeUsuario.
+ * @author Tiago Pereira
+ *
+ */
 public class Noob implements TipoDeUsuario {
-	public static final double DESCONTO_NOOB = 0.9;
-	private int bonus;
+	private static final double DESCONTO_NOOB = 0.9;
+	private static final int BONUS_NOOB = 10;
 	
+	/**
+	 * Construtor da classe.
+	 */
 	public Noob(){
-		this.bonus = 10;
 	}
 
+	/**
+	 * Implementa o compra jogo da interface.
+	 * Retorna o preco do jogo com desconto para o tipo Noob.
+	 */
 	@Override
 	public double compraJogo(Jogo jogo){
 		double custo = jogo.getPreco() * DESCONTO_NOOB;
 		return custo;
 	}
 	
+	/**
+	 * Implementa o metodo recompensar da interface TipoDeUsuario.
+	 * Retorna o inteiro referente a recompensa para o tipo Noob.
+	 */
 	@Override
 	public int recompensar(Jogo jogo){
 		int recompensa = 0;
@@ -30,6 +45,10 @@ public class Noob implements TipoDeUsuario {
 		
 	}
 
+	/**
+	 * Implementa o metodo punir da interface TipoDeUsuario.
+	 * Retorna o inteiro referente a punicao para o tipo Noob.
+	 */
 	@Override
 	public int punir(Jogo jogo){
 		int punicao = 0;
@@ -46,8 +65,14 @@ public class Noob implements TipoDeUsuario {
 	}
 	
 
-	public int getBonus(){
-		return this.bonus;
+	/**
+	 * Implementa o metodo da interface.
+	 * Retorna o bonus para usuario noob.
+	 */
+	public int getBonusPorCompra(Jogo jogo){
+		int parteInteira =(int) jogo.getPreco();
+		int bonusXp =  parteInteira * BONUS_NOOB;
+		return bonusXp;
 	}
 	
 	@Override

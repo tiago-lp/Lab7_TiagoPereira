@@ -1,5 +1,10 @@
 package excecoes;
 
+/**
+ * Classe para excecoes de preco.
+ * @author Tiago Pereira
+ *
+ */
 public class PrecoInvalidoException extends LojaException {
 
 	/**

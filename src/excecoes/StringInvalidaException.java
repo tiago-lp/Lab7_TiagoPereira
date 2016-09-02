@@ -1,5 +1,10 @@
 package excecoes;
 
+/**
+ * Classe para excecoes de String.
+ * @author Tiago Pereira
+ *
+ */
 public class StringInvalidaException extends LojaException {
 
 	/**

@@ -20,23 +20,27 @@ public class JogoFactory {
 	
 	private HashMap<String, Jogabilidade> mapJogabildades;
 
+	/**
+	 * Construtor da classe.
+	 */
 	public JogoFactory(){
 		this.initializeMap();
 	}
 	
 	/**
 	 * Instancia uma subclasse do tipo Jogo de acordo com o tipo informado como parametro.
-	 * 
 	 * @param nome
 	 * 		Nome do jogo.
 	 * @param preco
 	 * 		Preco do jogo.
 	 * @param tipo
-	 * 		Define o tipo do jogo a ser instanciado.
+	 * 		Tipo do jogo a ser instanciado.
 	 * @return
-	 * 		Retorna uma subclasse de Jogo.
-	 * @throws Exception
-	 * 		Exception para um tipo invalido.
+	 * 		O jogo criado.
+	 * @throws StringInvalidaException
+	 * 		Quando o tipo do jogo eh invalido.
+	 * @throws PrecoInvalidoException
+	 * 		Quando o preco do jogo eh negativo.
 	 */
 	public Jogo criaJogo(String nome, double preco, String tipo) throws StringInvalidaException, PrecoInvalidoException{
 		if(tipo == null || !(tipo.equalsIgnoreCase("RPG") || tipo.equalsIgnoreCase("Luta")
@@ -58,6 +62,23 @@ public class JogoFactory {
 		return null;
 	}
 	
+	/**
+	 * Instancia uma subclasse do tipo Jogo de acordo com o tipo informado como parametro.
+	 * @param nome
+	 * 		Nome do jogo.
+	 * @param preco
+	 * 		Preco do jogo.
+	 * @param jogabilidades
+	 * 		Conjunto de jogabilidades que o jogo possui.
+	 * @param tipo
+	 * 		Tipo do jogo a ser instanciado.
+	 * @return
+	 * 		O jogo criado.
+	 * @throws StringInvalidaException
+	 * 		Quando o tipo do jogo eh invalido.
+	 * @throws PrecoInvalidoException
+	 * 		Quando o preco eh negativo.
+	 */
 	public Jogo criaJogo(String nome, double preco, String jogabilidades, String tipo)
 			throws StringInvalidaException, PrecoInvalidoException {
 		if(tipo == null || !(tipo.equalsIgnoreCase("RPG") || tipo.equalsIgnoreCase("Luta")
@@ -83,6 +104,13 @@ public class JogoFactory {
 		
 	}
 	
+	/**
+	 * Cria o conjunto de jogabilidades do jogo.
+	 * @param names1
+	 * 		Nomes das jogabilidades
+	 * @return
+	 * 		O conjunto de jogabilidades.
+	 */
 	private Set<Jogabilidade> createJogabilidades(String names1) {
 		Set<Jogabilidade> jogabilidades = new HashSet<Jogabilidade>();
 
@@ -100,6 +128,9 @@ public class JogoFactory {
 
 	}
 	
+	/**
+	 * Inicializa o conjunto de jogabilidades.
+	 */
 	private void initializeMap() {
 		this.mapJogabildades = new HashMap<String, Jogabilidade>();
 		mapJogabildades.put("ONLINE", Jogabilidade.ONLINE);

@@ -1,5 +1,10 @@
 package excecoes;
 
+/**
+ * Classe para excecoes de valores.
+ * @author Tiago Pereira
+ *
+ */
 public class ValorInvalidoException extends LojaException {
 
 	/**

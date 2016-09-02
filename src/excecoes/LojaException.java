@@ -1,5 +1,10 @@
 package excecoes;
 
+/**
+ * Classe para excecoes em geral que possam ocorrer na loja.
+ * @author Tiago Pereira
+ *
+ */
 public class LojaException extends Exception {
 	
 	/**

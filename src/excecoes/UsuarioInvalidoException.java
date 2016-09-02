@@ -1,11 +1,11 @@
 package excecoes;
 /*115210912 - Tiago Lima Pereira: LAB 7 - Turma 3*/
 /**
- * SubClasse de SteamException para tratamento de erros relacionados a Usuario.
+ * Classe para excecoes relacionados a Usuario invalido.
  * 
  * @author Tiago Pereira
  */
-public class UsuarioInvalidoException extends TipoException{
+public class UsuarioInvalidoException extends LojaException{
 
 	/**
 	 * 

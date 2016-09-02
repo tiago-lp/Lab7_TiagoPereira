@@ -6,6 +6,12 @@ import usuario.Usuario;
 import jogo.Jogo;
 import excecoes.*;
 
+/**
+ * Classe LojaController.
+ * 
+ * @author Tiago Pereira
+ *
+ */
 public class LojaController {
 	public static final String FIM_DE_LINHA = System.lineSeparator();
 
@@ -36,6 +42,8 @@ public class LojaController {
 	 * 		Tipo de Usuario a ser criado.
 	 * @return
 	 * 		Boolean indicando se foi cadastrado(True) ou nao(False).
+	 * @throws LojaException
+	 * 		Lanca uma possivel excecao da Factory de Usuario.
 	 */
 	public boolean criaUsuario(String nome, String login, String tipo) throws LojaException{
 		Usuario novo = fabricaUsuario.criaUsuario(nome, login, tipo);
@@ -49,7 +57,7 @@ public class LojaController {
 	 * 		Login do usuario a ser removido.
 	 * @return
 	 * 		Boolean indicando se o usuario foi removido(true) ou nao(false).
-	 * @throws SteamException
+	 * @throws LojaException
 	 * 		Quando o usuario nao esta cadastrado na loja.
 	 */
 	public boolean removeUsuario(String login) throws LojaException{
@@ -72,6 +80,8 @@ public class LojaController {
 	 * 		Tipo do jogo a ser criado.
 	 * @return
 	 * 		Boolean indicando se foi adicionado(true) ou nao(false).
+	 * @throws LojaException
+	 * 		Lanca uma possivel excecao da Factory de Jogo.
 	 */
 	public boolean adicionaJogo(String nome,double preco, String tipo)throws LojaException{
 		Jogo novo = fabricaJogo.criaJogo(nome, preco, tipo);
@@ -85,8 +95,9 @@ public class LojaController {
 	 * 		nome do jogo a ser removido.
 	 * @return
 	 * 		Boolean indicando se o jogo foi removido(true) ou nao(false).
-	 * @throws SteamException
+	 * @throws LojaException
 	 * 		Quando o jogo nao esta cadastrado na loja.
+	 * 
 	 */
 	public boolean removeJogo(String nome) throws LojaException{
 		boolean contemJogo = this.contemJogo(nome);
@@ -104,7 +115,7 @@ public class LojaController {
 	 * 		login do usuario a ser buscado.
 	 * @return
 	 * 		Um Usuario.
-	 * @throws StringException
+	 * @throws StringInvalidaException
 	 * 		Quando o login eh nulo ou vazio.
 	 */
 	public Usuario getUsuario(String login) throws StringInvalidaException {
@@ -125,7 +136,7 @@ public class LojaController {
 	 * 		login do usuario a ser buscado.
 	 * @return
 	 * 		Boolean indicando se o usuario existe (true) ou nao (false).
-	 * @throws StringException
+	 * @throws StringInvalidaException
 	 * 		Quando o login eh nulo ou vazio.
 	 */
 	public boolean contemUsuario(String login) throws StringInvalidaException {
@@ -145,7 +156,7 @@ public class LojaController {
 	 * 		Nome do jogo a ser buscado.
 	 * @return
 	 * 		Um Jogo.
-	 * @throws StringException
+	 * @throws StringInvalidaException
 	 * 		Quando o nome eh nulo ou vazio.
 	 */
 	public Jogo getJogo(String nome) throws StringInvalidaException {
@@ -166,7 +177,7 @@ public class LojaController {
 	 * 		Nome do jogo a ser buscado.
 	 * @return
 	 * 		Boolean indicando se o usuario existe (true) ou nao (false).
-	 * @throws StringException
+	 * @throws StringInvalidaException
 	 * 		Quando o nome eh nulo ou vazio.
 	 */
 	public boolean contemJogo(String nome) throws StringInvalidaException {
@@ -180,7 +191,7 @@ public class LojaController {
 	}
 	
 	/**
-	 * Adiciona dinheiro ao saldo de um usuario.
+	 * Adiciona credito ao saldo de um usuario.
 	 * 
 	 * @param login
 	 * 		Login do usuario ao qual o saldo ira ser adicionado.
@@ -188,7 +199,7 @@ public class LojaController {
 	 * 		Valor que ira ser adicionado ao saldo do usuario.
 	 * @return
 	 * 		Boolean indicando se o saldo foi adicionado(true) ou nao(false).
-	 * @throws SteamException
+	 * @throws LojaException
 	 * 		Quando: 1. Login eh nulo ou vazio;
 	 * 				2. valor eh menor que zero.
 	 */
@@ -201,6 +212,15 @@ public class LojaController {
 		
 	}
 	
+	/**
+	 * Confere o credito de um determinado usuario.
+	 * @param login
+	 * 		Login do usuario a ser verificado o credito.
+	 * @return
+	 * 		Valor do credito do usuario.
+	 * @throws LojaException
+	 * 		Quando o usuario eh invalido.
+	 */
 	public double confereCredito(String login) throws LojaException{
 		if(!contemUsuario(login)){
 			throw new UsuarioInvalidoException("Usuario invalido.");
@@ -210,7 +230,21 @@ public class LojaController {
 		return credito;
 	}
 	
-	
+	/**
+	 * Cria e vende um jogo a um determinado usuario.
+	 * @param jogoNome
+	 * 		Nome do jogo a ser criado.
+	 * @param preco
+	 * 		Preco do jogo a ser criado.
+	 * @param jogabilidades
+	 * 		Jogabilidades do jogo a ser criado.
+	 * @param tipo
+	 * 		Tipo do jogo a ser criado.
+	 * @param loginUser
+	 * 		Login do usuario que o jogo ira ser vendido.
+	 * @throws LojaException
+	 * 		Lanca uma possivel excecao de String ou Valor do construtor do Jogo.
+	 */
 	public void vendeJogo(String jogoNome, double preco, String jogabilidades, String tipo, String loginUser)throws LojaException{
 		if(contemUsuario(loginUser) && contemJogo(jogoNome)){
 			vendeJogo(loginUser, jogoNome);
@@ -222,6 +256,15 @@ public class LojaController {
 		}
 	}
 	
+	/**
+	 * Vende um jogo ja existente a um determinado usuario.
+	 * @param loginUser
+	 * 		Login do usuario a quem o jogo sera vendido.
+	 * @param jogoNome
+	 * 		Nome do jogo a ser vendido.
+	 * @throws LojaException
+	 * 		Quando o jogo nao existe na loja.
+	 */
 	public void vendeJogo(String loginUser, String jogoNome) throws LojaException{
 		if(contemUsuario(loginUser) && contemJogo(jogoNome)){
 			Usuario usuario = getUsuario(loginUser);
@@ -230,6 +273,19 @@ public class LojaController {
 		}
 	}
 	
+	/**
+	 * Pune um determinado usuario em uma jogada.
+	 * @param login
+	 * 		Login do usuario a ser punido.
+	 * @param jogoNome
+	 * 		Nome do jogo jogado.
+	 * @param scoreObtido
+	 * 		Score obtido na jogada.
+	 * @param zerou
+	 * 		Boolean indicando se o usuario concluiu o jogo(true) ou nao(false).
+	 * @throws LojaException
+	 * 		Quando o usuario nao existe.
+	 */
 	public void punir(String login, String jogoNome, int scoreObtido, boolean zerou) throws LojaException {
 		if(!contemUsuario(login)){
 			throw new UsuarioInvalidoException("Usuario inexistente.");
@@ -238,6 +294,19 @@ public class LojaController {
 		user.punir(jogoNome, scoreObtido, zerou);
 	}
 	
+	/**
+	 * Recompensa um determinado usuario em uma jogada.
+	 * @param login
+	 * 		Login do usuario a ser recompensado.
+	 * @param jogoNome
+	 * 		Nome do jogo jogado.
+	 * @param scoreObtido
+	 * 		Score obtido na jogada.
+	 * @param zerou
+	 * 		Boolean indicando se o usuario concluiu o jogo(true) ou nao(false).
+	 * @throws LojaException
+	 * 		Quando o usuario nao existe.
+	 */
 	public void recompensar(String login, String jogoNome, int scoreObtido, boolean zerou) throws LojaException {
 		if(!contemUsuario(login)){
 			throw new UsuarioInvalidoException("Usuario inexistente.");
@@ -246,15 +315,30 @@ public class LojaController {
 		user.recompensar(jogoNome, scoreObtido, zerou);	
 	}
 	
-	
+	/**
+	 * Retorna o x2p de um determinado usuario.
+	 * @param login
+	 * 		Login do usuario.
+	 * @return
+	 * 		X2p do usuario.
+	 * @throws LojaException
+	 * 		Quando o usuario nao existe.
+	 */
 	public int getX2p(String login) throws LojaException{
 		if(!contemUsuario(login)){
-			throw new UsuarioInvalidoException("Usuario invalido.");
+			throw new UsuarioInvalidoException("Usuario Inexistente.");
 		}
 		Usuario user = getUsuario(login);
 		return user.getX2p();
 	}
 	
+	/**
+	 * Torna o status de um usuario noob em veterano.
+	 * @param login
+	 * 		Login do usuario a ter o status alterado.
+	 * @throws LojaException
+	 * 		Quando o usuario nao existe ou quando o x2p eh insuficiente.
+	 */
 	public void upgrade(String login) throws LojaException{
 		if(!contemUsuario(login)){
 			throw new UsuarioInvalidoException("Usuario inexistente.");
@@ -268,6 +352,13 @@ public class LojaController {
 		user.upgrade();
 	}
 	
+	/**
+	 * Torna o status de um usuario veterano em noob.
+	 * @param login
+	 * 		Login do usuario a ter o status alterado.
+	 * @throws LojaException
+	 * 		Quando o usuario nao existe.
+	 */
 	public void downgrade(String login) throws LojaException{
 		if(!contemUsuario(login)){
 			throw new UsuarioInvalidoException("Usuario inexistente.");
@@ -278,8 +369,10 @@ public class LojaController {
 			user.downgrade();
 		}
 	}
-	
 
+	/**
+	 * HashCode
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -288,10 +381,10 @@ public class LojaController {
 		return result;
 	}
 
-	@Override
 	/**
-	 * Equals da loja. Uma loja eh igual a outra se possuirem os mesmos usuarios cadastrados.
+	 * Equals
 	 */
+	@Override
 	public boolean equals(Object objeto) {
 		if(objeto instanceof LojaController){
 			LojaController outraLoja = new LojaController();
@@ -305,6 +398,9 @@ public class LojaController {
 		}
 	}
 
+	/**
+	 * ToString
+	 */
 	public String toString(){
 		String saida = "=== Central P2-CG ===" + FIM_DE_LINHA + FIM_DE_LINHA;
 		for(Usuario usuario : this.usuarios){
@@ -335,7 +431,7 @@ public class LojaController {
 	 * 
 	 * @param login
 	 * 		login a ser verificado.
-	 * @throws StringException
+	 * @throws StringInvalidaException
 	 * 		Quando o login eh nulo ou vazio.
 	 */
 	private void loginException(String login) throws StringInvalidaException {
@@ -349,7 +445,7 @@ public class LojaController {
 	 * 
 	 * @param nome
 	 * 		Nome a ser verificado.
-	 * @throws StringException
+	 * @throws StringInvalidaException
 	 * 		Quando nome eh nulo ou vazio.
 	 */
 	private void nomeException(String nome) throws StringInvalidaException {

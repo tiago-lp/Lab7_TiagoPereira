@@ -2,11 +2,10 @@ package excecoes;
 /*115210912 - Tiago Lima Pereira: LAB 7 - Turma 3*/
 
 /**
- * Subclasse de SteamException para tratar exceptions relacionadas ao objeto jogo.
- * 
+ * Classe que trata de excecoes para jogo invalido. 
  * @author Tiago Pereira
  */
-public class JogoInvalidoException  extends TipoException{
+public class JogoInvalidoException  extends LojaException{
 
 	/**
 	 * 

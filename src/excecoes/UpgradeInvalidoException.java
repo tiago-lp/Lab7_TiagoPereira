@@ -1,6 +1,11 @@
 package excecoes;
 
-public class UpgradeInvalidoException extends OperacaoException {
+/**
+ * Classe para excecoes no upgrade de usuario. 
+ * @author Tiago Pereira
+ *
+ */
+public class UpgradeInvalidoException extends LojaException {
 
 	/**
 	 * 

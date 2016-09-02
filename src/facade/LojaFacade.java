@@ -4,14 +4,33 @@ import loja.LojaController;
 import easyaccept.EasyAccept;
 import excecoes.LojaException;
 
+/**
+ * Classe facade.
+ * Facade da loja.
+ * 
+ * @author Tiago Pereira
+ *
+ */
 public class LojaFacade {
 	
 	LojaController loja;
 	
+	/**
+	 * Construtor da classe.
+	 */
 	public LojaFacade(){
 		this.loja = new LojaController();
 	}
 	
+	/**
+	 * Cria um usuario.
+	 * @param nome
+	 * 		Nome do usuario.
+	 * @param login
+	 * 		Login do usuario.
+	 * @param tipo
+	 * 		Tipo de usuario.
+	 */
 	public void criaUsuario(String nome, String login, String tipo){
 		try{
 			loja.criaUsuario(nome, login, tipo);
@@ -20,6 +39,13 @@ public class LojaFacade {
 		}
 	}
 	
+	/**
+	 * Adiciona credito para um usuario.
+	 * @param login
+	 * 		Login do usuario.
+	 * @param valor
+	 * 		Valor do credito a ser adicionado.
+	 */
 	public void adicionaCredito(String login, double valor){
 		try{
 			loja.adicionaCredito(login, valor);
@@ -28,6 +54,13 @@ public class LojaFacade {
 		}
 	}
 	
+	/**
+	 * Confere o credito de um usuario.
+	 * @param login
+	 * 		Login do usuario.
+	 * @return
+	 * 		Credito do usuario.
+	 */
 	public double confereCredito(String login){
 		try{
 			return loja.confereCredito(login);
@@ -37,6 +70,19 @@ public class LojaFacade {
 		}
 	}
 	
+	/**
+	 * Cria e vende um jogo a um usuario.
+	 * @param jogoNome
+	 * 		Nome do jogo a ser criado.
+	 * @param preco
+	 * 		Preco do jogo a ser criado.
+	 * @param jogabilidades
+	 * 		Jogabilidades do jogo.
+	 * @param estiloJogo
+	 * 		Estilo do jogo.
+	 * @param loginUser
+	 * 		Login do usuario a quem o jogo sera vendido.
+	 */
 	public void vendeJogo(String jogoNome, double preco, String jogabilidades, String estiloJogo, String loginUser){
 		try{
 			loja.vendeJogo(jogoNome, preco, jogabilidades, estiloJogo, loginUser);
@@ -45,6 +91,11 @@ public class LojaFacade {
 		}
 	}
 	
+	/**
+	 * Faz upgrade de um usuario, de noob para veterano.
+	 * @param login
+	 * 		Login do usuario.
+	 */
 	public void upgrade(String login){
 		try {
 			loja.upgrade(login);
@@ -53,6 +104,17 @@ public class LojaFacade {
 		}
 	}
 	
+	/**
+	 * Pune um usuario em uma jogada.
+	 * @param login
+	 * 		Login do usuario.
+	 * @param jogoNome
+	 * 		Nome do jogo jogado.
+	 * @param scoreObtido
+	 * 		Score obtido na jogada.
+	 * @param zerou
+	 * 		Boolean indicando se o usuario zerou o jogo.
+	 */
 	public void punir(String login, String jogoNome, int scoreObtido, boolean zerou){
 		try{
 			loja.punir(login, jogoNome, scoreObtido, zerou);
@@ -61,6 +123,17 @@ public class LojaFacade {
 		}
 	}
 	
+	/**
+	 * Recompensa um usuario em uma jogada.
+	 * @param login
+	 * 		Login do usuario.
+	 * @param jogoNome
+	 * 		Nome do jogo jogado.
+	 * @param scoreObtido
+	 * 		Score obtido na jogada.
+	 * @param zerou
+	 * 		Boolean indicando se o usuario zerou o jogo.
+	 */
 	public void recompensar(String login, String jogoNome, int scoreObtido, boolean zerou){
 		try{
 			loja.recompensar(login, jogoNome, scoreObtido, zerou);
@@ -69,6 +142,13 @@ public class LojaFacade {
 		}
 	}
 	
+	/**
+	 * Retorna o x2p de um usuario.
+	 * @param login
+	 * 		Login do usuario.
+	 * @return
+	 * 		O x2p do usuario.
+	 */
 	public int getX2p(String login){
 		try{
 			return loja.getX2p(login);
