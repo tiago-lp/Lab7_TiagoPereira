@@ -2,6 +2,9 @@ package usuario;
 
 import static org.junit.Assert.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -172,75 +175,68 @@ public class TestUsuario {
 		}
 	}
  
+	@Test
+	public void recompensar() throws Exception{
+		Set<Jogabilidade> jogabilidades1 = new HashSet<Jogabilidade>();
+		Set<Jogabilidade> jogabilidades2 = new HashSet<Jogabilidade>();
+	
+		//noob
+		jogabilidades1.add(Jogabilidade.OFFLINE);
+		jogabilidades1.add(Jogabilidade.MULTIPLAYER);
+		
+		//veterano
+		jogabilidades2.add(Jogabilidade.ONLINE);
+		jogabilidades2.add(Jogabilidade.COOPERATIVO);
+
+
+		
+		Jogo tes1 = new Luta("test", 0.0, jogabilidades1);
+		Jogo tes2 = new Luta("test2", 0.0, jogabilidades2);
+	
+		tiago.compraJogo(tes1);
+		neto.compraJogo(tes2);
+		
+		tiago.recompensar("test", 0, true);
+		//tiago eh noob
+		Assert.assertEquals(40, tiago.getX2p());
+		
+		neto.recompensar("test2", 0, true);
+		//neto eh veterano
+		Assert.assertEquals(1030, neto.getX2p());
+		
+	}
  
 	@Test
-	public void registraJogada() throws Exception{
- 
-		Jogo kof = new Luta("The King Of Fighters 98", 120.0);
-		Jogo ff = new Rpg("Final Fantasy VIII", 50.00);
-		Jogo mario = new Plataforma("Super Mario", 20.0);
- 
-		arthur.adicionaDinheiro(300);
-		arthur.compraJogo(kof);
- 
- 
-		tiago.adicionaDinheiro(200);
-		tiago.compraJogo(ff);
- 
-		neto.adicionaDinheiro(100);
-		neto.compraJogo(mario);
- 
-	}
-		/*try{
-			arthur.re("The King Of Fighters 98", 200, false);
-			assertEquals(2800, arthur.getX2p());
- 
-			arthur.registraJogada("The King Of Fighters 98", 2000, true);
-			assertEquals(2802, arthur.getX2p());
- 
-			arthur.registraJogada("The King Of Fighters 98", 10000, false);
-			assertEquals(2812, arthur.getX2p());
- 
-		}catch(Exception e){
-			Assert.fail();
-		}
- 
- 
-		try{
-			tiago.registraJogada("Final Fantasy VIII", 200, false);
-			assertEquals(510, tiago.getX2p());
- 
-			tiago.registraJogada("Final Fantasy VIII", 3000, true);
-			assertEquals(520, tiago.getX2p());
- 
-		}catch (Exception e){
-			System.out.println(e.getMessage());
-			Assert.fail();
-		}
- 
- 
-		try{
-			neto.registraJogada("Super Mario", 500, false);
-			assertEquals(1300, neto.getX2p());
- 
-			neto.registraJogada("Super Mario", 3000, true);
-			assertEquals(1320, neto.getX2p());
- 
-		}catch(Exception e){
-			Assert.fail();
-		}
- 
+	public void punir() throws Exception{
+		Set<Jogabilidade> jogabilidades1 = new HashSet<Jogabilidade>();
+		Set<Jogabilidade> jogabilidades2 = new HashSet<Jogabilidade>();
+	
+		//noob
+		jogabilidades1.add(Jogabilidade.ONLINE);
+		jogabilidades1.add(Jogabilidade.COMPETITIVO);
+		jogabilidades1.add(Jogabilidade.COOPERATIVO);
+		
+		//veterano
+		jogabilidades2.add(Jogabilidade.COMPETITIVO);
+		jogabilidades2.add(Jogabilidade.OFFLINE);
+		
+		Jogo tes1 = new Luta("test", 0.0, jogabilidades1);
+		Jogo tes2 = new Luta("test2", 0.0, jogabilidades2);
+	
+		tiago.compraJogo(tes1);
+		neto.compraJogo(tes2);
+		
+		tiago.setX2p(100);
+		
+		tiago.punir("test", 0, true);
+		//tiago eh noob
+		Assert.assertEquals(20, tiago.getX2p());
+		
+		neto.punir("test2", 0, true);
+		//neto eh veterano
+		Assert.assertEquals(960, neto.getX2p());
 	}
 	
-	@Test
-	public void registraJogadaException(){
-		try{
-			tiago.registraJogada("Tomb Raider", 5000, true);
-		}catch(Exception e){
-			Assert.assertEquals("Usuario nao possui esse jogo.", e.getMessage());
-		}
-	}*/
- 
 	@Test
 	public void testEquals() throws Exception{
  
