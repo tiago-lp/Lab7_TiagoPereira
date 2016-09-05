@@ -250,7 +250,7 @@ public class LojaController {
 		else if(contemUsuario(loginUser)){
 			Usuario usuario = getUsuario(loginUser);
 			Jogo jogo = this.fabricaJogo.criaJogo(jogoNome, preco, jogabilidades, tipo);
-			usuario.compraJogo(jogo);
+			usuario.compraJogo(jogo); // chamada polimorfica
 		}
 	}
 	
@@ -267,7 +267,7 @@ public class LojaController {
 		if(contemUsuario(loginUser) && contemJogo(jogoNome)){
 			Usuario usuario = getUsuario(loginUser);
 			Jogo jogo = getJogo(jogoNome);
-			usuario.compraJogo(jogo);
+			usuario.compraJogo(jogo); // chamada polimorfica
 		}
 	}
 	
@@ -289,7 +289,7 @@ public class LojaController {
 			throw new UsuarioInvalidoException("Usuario inexistente.");
 		}
 		Usuario user = getUsuario(login);
-		user.punir(jogoNome, scoreObtido, zerou);
+		user.punir(jogoNome, scoreObtido, zerou); // chamada polimorfica
 	}
 	
 	/**
@@ -310,7 +310,7 @@ public class LojaController {
 			throw new UsuarioInvalidoException("Usuario inexistente.");
 		}
 		Usuario user = getUsuario(login);
-		user.recompensar(jogoNome, scoreObtido, zerou);	
+		user.recompensar(jogoNome, scoreObtido, zerou);	// chamada polimorfica
 	}
 	
 	/**

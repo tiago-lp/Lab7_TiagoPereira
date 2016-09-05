@@ -85,7 +85,7 @@ public class LojaFacade {
 	 */
 	public void vendeJogo(String jogoNome, double preco, String jogabilidades, String estiloJogo, String loginUser){
 		try{
-			loja.vendeJogo(jogoNome, preco, jogabilidades, estiloJogo, loginUser);
+			loja.vendeJogo(jogoNome, preco, jogabilidades, estiloJogo, loginUser); // chamada polimorfica
 		}catch(LojaException e){
 			System.out.println(e.getMessage());
 		}
@@ -117,7 +117,7 @@ public class LojaFacade {
 	 */
 	public void punir(String login, String jogoNome, int scoreObtido, boolean zerou){
 		try{
-			loja.punir(login, jogoNome, scoreObtido, zerou);
+			loja.punir(login, jogoNome, scoreObtido, zerou); // chamada polimorfica
 		}catch(LojaException e){
 			System.out.println(e.getMessage());
 		}
@@ -136,7 +136,7 @@ public class LojaFacade {
 	 */
 	public void recompensar(String login, String jogoNome, int scoreObtido, boolean zerou){
 		try{
-			loja.recompensar(login, jogoNome, scoreObtido, zerou);
+			loja.recompensar(login, jogoNome, scoreObtido, zerou); // chamada polimorfica
 		}catch(LojaException e){
 			System.out.println(e.getMessage());
 		}

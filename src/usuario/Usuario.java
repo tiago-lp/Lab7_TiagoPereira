@@ -67,11 +67,11 @@ public class Usuario {
 	 * 		Quando o valor do jogo ultrapassa o saldo do usuario.
 	 */
 	public void compraJogo(Jogo jogo) throws LojaException{
-		double custo = status.compraJogo(jogo);
+		double custo = status.compraJogo(jogo); // chamada polimorfica
 		if (custo > this.getCredito()) {
 			throw new ValorInvalidoException("Credito insuficiente para realizar a compra.");
 		} else {
-			int bonusXpPorCompra = status.getBonusPorCompra(jogo);
+			int bonusXpPorCompra = status.getBonusPorCompra(jogo); // chamada polimorfica
 			setX2p(getX2p() + bonusXpPorCompra);
 			setCredito(getCredito() - custo);
 			this.cadastraJogo(jogo);
@@ -95,8 +95,8 @@ public class Usuario {
 			throw new JogoInvalidoException("Usuario nao possui o jogo.");
 		}
 		Jogo jogo = buscaJogo(jogoNome);
-		int x2pJogada = jogo.registraJogada(scoreObtido, zerou);
-		int recompensa = status.recompensar(jogo);
+		int x2pJogada = jogo.registraJogada(scoreObtido, zerou); // chamada polimorfica
+		int recompensa = status.recompensar(jogo); // chamada polimorfica
 		setX2p(this.getX2p() + recompensa + x2pJogada);
 	}
 	
@@ -117,8 +117,8 @@ public class Usuario {
 			throw new JogoInvalidoException("Usuario nao possui o jogo.");
 		}
 		Jogo jogo = buscaJogo(jogoNome);
-		int x2pJogada = jogo.registraJogada(scoreObtido, zerou);
-		int punicao = status.punir(jogo);
+		int x2pJogada = jogo.registraJogada(scoreObtido, zerou); // chamada polimorfica
+		int punicao = status.punir(jogo); // chamada polimorfica
 		setX2p(this.getX2p() + punicao + x2pJogada);
 	}
 	
