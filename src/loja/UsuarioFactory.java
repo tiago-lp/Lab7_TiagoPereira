@@ -1,5 +1,5 @@
 package loja;
-/*115210912 - Tiago Lima Pereira: LAB 6 - Turma 3*/
+/*115210912 - Tiago Lima Pereira: LAB 7 - Turma 3*/
 
 import usuario.*;
 import excecoes.*;

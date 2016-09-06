@@ -1,4 +1,5 @@
 package loja;
+/*115210912 - Tiago Lima Pereira: LAB 7 - Turma 3*/
 
 import java.util.Set;
 import java.util.HashSet;
